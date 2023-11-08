@@ -120,7 +120,7 @@ class shared extends \renderer_base {
             'output' => $o,
             'progress' => $a,
             'complete' => $complete,
-            'total' => $total
+            'total' => $total,
         );
 
         return $retobj;
@@ -178,15 +178,15 @@ EOF;
             'actionchoice',
             'servererror',
             'upload',
-            'cancel'
+            'cancel',
         ], 'moodle');
         $PAGE->requires->strings_for_js([
-            'modulename'
+            'modulename',
         ], 'mod_label');
         $vars = array(
             array('courseid' => $course->id,
                 'maxbytes' => $maxbytes,
-                'showstatus' => $showstatus)
+                'showstatus' => $showstatus, ) ,
         );
 
         $PAGE->requires->js('/course/dndupload.js');
@@ -242,7 +242,7 @@ EOF;
             'totopofsection',
             'unknownerror',
             'ok',
-            'cancel'
+            'cancel',
         ], 'moodle');
 
         $PAGE->requires->strings_for_js([
@@ -258,7 +258,7 @@ EOF;
             'error:failedtotoc',
             'deleteassetconfirm',
             'deletesectionconfirm',
-            'deletingsection'
+            'deletingsection',
         ], 'theme_snap');
 
         // Include section-specific strings for formats which support sections.
@@ -314,7 +314,7 @@ EOF;
             'movingdropsectionhelp',
             'movingstartedhelp',
             'notpublished',
-            'visibility'
+            'visibility',
         ), 'theme_snap');
 
         $PAGE->requires->strings_for_js([
@@ -327,15 +327,15 @@ EOF;
             'modshow',
             'hiddenoncoursepage',
             'showoncoursepage',
-            'switchrolereturn'
+            'switchrolereturn',
         ], 'moodle');
 
         $PAGE->requires->strings_for_js([
-            'printbook'
+            'printbook',
         ], 'booktool_print');
 
         $PAGE->requires->strings_for_js([
-            'progresstotal'
+            'progresstotal',
         ], 'completion');
 
         // Are we viewing /course/view.php - note, this is different from just checking the page type.
@@ -458,7 +458,7 @@ EOF;
 
         $initvars = [$coursevars, $pagehascoursecontent, get_max_upload_file_size($CFG->maxbytes), $forcepwdchange,
                      $conversationbadgecountenabled, $userid, $sitepolicyacceptreqd, $inalternativerole, $brandcolors,
-                     $gradingconstants];
+                     $gradingconstants, ];
         $initaxvars = [$localjoulegrader, $allyreport, $blockreports, $localcatalogue];
         $alternativelogins = new login_alternative_methods();
         if ($alternativelogins->potentialidps) {
@@ -641,7 +641,7 @@ EOF;
             // Gradebook.
             $links[] = array(
                 'link' => 'grade/index.php?id='.$COURSE->id,
-                'title' => $gradebookicon.get_string('gradebook', 'grades')
+                'title' => $gradebookicon.get_string('gradebook', 'grades'),
             );
         }
 
@@ -672,7 +672,7 @@ EOF;
             $participanticons = '<div class="snap-participant-icons">'.$participanticons.'</div>';
             $links[] = array(
                 'link' => 'user/index.php?id='.$COURSE->id.'&mode=1',
-                'title' => $participanticons.$usercount.' '.get_string('participants')
+                'title' => $participanticons.$usercount.' '.get_string('participants'),
             );
         }
 
@@ -685,7 +685,7 @@ EOF;
             ) {
                 $links[] = array(
                     'link' => $CFG->wwwroot.'/blocks/reports/view.php?action=dashboard&courseid='.$COURSE->id,
-                    'title' => $reportsicon.'Open Reports'
+                    'title' => $reportsicon.'Open Reports',
                 );
             }
         }
@@ -701,7 +701,7 @@ EOF;
                 $links[] = array(
                     'link' => $CFG->wwwroot.'/blocks/reports/view.php?action=dashboardce&courseid='.$COURSE->id,
                     'title' => $reportsicon.'Open Reports ('.get_string('experimental',
-                            'block_reports').')'
+                            'block_reports').')',
                 );
             }
         }
@@ -713,7 +713,7 @@ EOF;
             $pldname = get_string('pld', 'theme_snap');
             $links[] = array(
                 'link' => 'local/pld/view.php?courseid='.$COURSE->id,
-                'title' => $pldicon.$pldname
+                'title' => $pldicon.$pldname,
             );
         }
 
@@ -725,7 +725,7 @@ EOF;
                 $pldname = get_string('pldexperimental', 'local_pld');
                 $links[] = array(
                     'link' => 'local/pld/view.php?pldexperimental=1&courseid='.$COURSE->id,
-                    'title' => $pldicon.$pldname
+                    'title' => $pldicon.$pldname,
                 );
             }
         }
@@ -736,7 +736,7 @@ EOF;
             $competenciesicon = '<img src="'.$iconurl.'" class="svg-icon" alt="" role="presentation">';
             $links[] = array(
                 'link'  => 'admin/tool/lp/coursecompetencies.php?courseid='.$COURSE->id,
-                'title' => $competenciesicon.get_string('competencies', 'core_competency')
+                'title' => $competenciesicon.get_string('competencies', 'core_competency'),
             );
         }
 
@@ -781,7 +781,7 @@ EOF;
                 $badgesicon = '<img src="'.$iconurl.'" class="svg-icon" alt="" role="presentation">';
                 $links[] = array(
                     'link' => 'badges/view.php?type=' . BADGE_TYPE_COURSE . '&id=' . $COURSE->id,
-                    'title' => $badgesicon.get_string('badges', 'badges')
+                    'title' => $badgesicon.get_string('badges', 'badges'),
                 );
             }
         }
@@ -804,14 +804,14 @@ EOF;
                 );
                 $links[] = array(
                     'link' => $url->out_as_local_url(false),
-                    'title' => $badgesicon . $site->get_integration_catalog_title()
+                    'title' => $badgesicon . $site->get_integration_catalog_title(),
                 );
             } else {
                 foreach (get_mediasite_sites(true, false) as $site) {
                     $url = new moodle_url('/mod/mediasite/courses7.php', array('id' => $COURSE->id, 'siteid' => $site->id));
                     $links[] = array(
                         'link' => $url->out_as_local_url(false),
-                        'title' => $badgesicon . $site->integration_catalog_title
+                        'title' => $badgesicon . $site->integration_catalog_title,
                     );
                 }
             }
@@ -828,7 +828,7 @@ EOF;
             $url = new moodle_url('/report/allylti/launch.php', [
                     'reporttype' => 'course',
                     'report' => 'admin',
-                    'course' => $COURSE->id]
+                    'course' => $COURSE->id, ]
             );
 
             $iconurl = $OUTPUT->image_url('i/ally_logo', 'theme_snap');
@@ -836,7 +836,7 @@ EOF;
             $links[] = [
                 'link' => $url->out_as_local_url(false),
                 'title' => $allyicon . get_string('coursereport', 'report_allylti'),
-                'attributes' => ['target' => '_blank']
+                'attributes' => ['target' => '_blank'],
             ];
         }
 
@@ -1054,7 +1054,7 @@ EOF;
             $link = [
                 'link' => $linkattr->url,
                 'title' => $iconurl . $linkattr->displaystring,
-                'attributes' => $linkattr->elementattributes
+                'attributes' => $linkattr->elementattributes,
             ];
         }
         return $link;
