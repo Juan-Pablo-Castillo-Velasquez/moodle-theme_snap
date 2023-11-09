@@ -111,7 +111,7 @@ function theme_snap_set_category_colors($css, $theme) {
                 'nav-login-bg' => $colors[$category->id],
                 'nav-login-color' => '#FFFFFF',
                 'custom-menu-text-color' => $dbcustommenutextcoloractive ? $dbcustommenutextcolor : '#FFFFFF',
-                'gray-light' => '#6a737b'
+                'gray-light' => '#6a737b',
             ]);
 
             try {
@@ -222,7 +222,7 @@ function theme_snap_pluginfile($course, $cm, $context, $filearea, $args, $forced
         'slide_one_image',
         'slide_two_image',
         'slide_three_image',
-        'loginbgimg'
+        'loginbgimg',
     ];
 
     if ($context->contextlevel == CONTEXT_SYSTEM && in_array($filearea, $sysfileareas)) {
@@ -408,8 +408,8 @@ function theme_snap_output_fragment_section($args) {
                         'confirm_delete', 'clicktomove', 'folder_string',
                         'activity_string', 'delete_folder', 'modal_checkbox',
                         'modal_confirm_backup', 'modal_confirm_delete', 'backup_heavy_load_warning_message',
-                        'snap_dialog_restore'),
-                    'block_sharing_cart'
+                        'snap_dialog_restore', ),
+                    'block_sharing_cart',
                 );
             }
             $maxbytes = get_max_upload_file_size($CFG->maxbytes, $course->maxbytes);
@@ -421,7 +421,7 @@ function theme_snap_output_fragment_section($args) {
             $vars = array(
                 array('courseid' => $course->id,
                     'maxbytes' => $maxbytes,
-                    'showstatus' => false)
+                    'showstatus' => false, ),
             );
             $PAGE->requires->js_call_amd('theme_snap/dndupload-lazy', 'init', $vars);
             return $html;
@@ -457,16 +457,16 @@ function theme_snap_before_footer() {
 
     if (core_useragent::is_ie()) {
         $paths['theme_snap/snapce'] = [
-            $CFG->wwwroot . '/pluginfile.php/' . $PAGE->context->id . '/theme_snap/vendorjs/snap-custom-elements/snap-ce-es5'
+            $CFG->wwwroot . '/pluginfile.php/' . $PAGE->context->id . '/theme_snap/vendorjs/snap-custom-elements/snap-ce-es5',
         ];
     } else {
         $paths['theme_snap/snapce'] = [
-            $CFG->wwwroot . '/pluginfile.php/' . $PAGE->context->id . '/theme_snap/vendorjs/snap-custom-elements/snap-ce'
+            $CFG->wwwroot . '/pluginfile.php/' . $PAGE->context->id . '/theme_snap/vendorjs/snap-custom-elements/snap-ce',
         ];
     }
 
     $PAGE->requires->js_call_amd('theme_snap/wcloader', 'init', [
-        'componentPaths' => json_encode($paths)
+        'componentPaths' => json_encode($paths),
     ]);
 }
 
